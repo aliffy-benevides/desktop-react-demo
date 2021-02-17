@@ -1,5 +1,7 @@
 const { app, BrowserWindow, Notification } = require('electron');
 const net = require('net');
+const path = require('path');
+const url = require('url');
 
 // Function used for development
 function waitForReact(port) {
@@ -41,15 +43,19 @@ function createWindow() {
         win.webContents.openDevTools()
       })
   } else {
-    
+    win.loadURL(url.format({
+      pathname: path.join(__dirname, 'index.html'),
+      protocol: "file",
+      slashes: "true"
+    }))
   }
 }
 
 app.whenReady().then(createWindow)
   .then(() => {
     const notification = {
-      title: 'Basic Notification',
-      body: 'Notification from the Main process'
+      title: `Notification of ${process.env.NODE_ENV}`,
+      body: `This is a ${process.env.NODE_ENV} notification`
     }
     new Notification(notification).show()
   })
