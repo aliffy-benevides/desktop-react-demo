@@ -1,22 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
+
+import reactLogo from './assets/react-logo.svg';
+import electronLogo from './assets/electron-logo.svg';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <div className="App-logos">
+          <img src={reactLogo} className="App-logo" alt="logo" />
+          <img src={electronLogo} className="App-logo" alt="logo" />
+        </div>
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React and Electron
-        </a>
+        <p className="App-link">
+          Learn React at https://reactjs.org
+        </p>
+        <p className="App-link">
+          and Electron at https://www.electronjs.org
+        </p>
       </header>
     </div>
   );

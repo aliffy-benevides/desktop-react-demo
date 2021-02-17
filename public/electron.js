@@ -1,29 +1,7 @@
 const { app, BrowserWindow, Notification } = require('electron');
-const net = require('net');
 const path = require('path');
 const url = require('url');
-
-// Function used for development
-function waitForReact(port) {
-  const client = new net.Socket();
-
-  return new Promise((resolve, reject) => {
-    let startedElectron = false;
-    const tryConnection = () => client.connect({ port }, () => {
-      client.end();
-      if (!startedElectron) {
-        startedElectron = true;
-        resolve();
-      }
-    });
-    
-    tryConnection();
-    
-    client.on('error', (error) => {
-      setTimeout(tryConnection, 1000);
-    });
-  })
-}
+const isDev = require('electron-is-dev');
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -34,14 +12,9 @@ function createWindow() {
     }
   })
 
-  if (process.env.NODE_ENV === 'development') {
-    const port = process.env.PORT ? (process.env.PORT - 100) : 3000;
-
-    waitForReact(port)
-      .then(() => {
-        win.loadURL(`http://localhost:${port}`)
-        win.webContents.openDevTools()
-      })
+  if (isDev) {
+    win.loadURL('http://localhost:3000')
+    win.webContents.openDevTools()
   } else {
     win.loadURL(url.format({
       pathname: path.join(__dirname, 'index.html'),
@@ -53,9 +26,10 @@ function createWindow() {
 
 app.whenReady().then(createWindow)
   .then(() => {
+    const nodeEnv = isDev ? 'development' : 'production';
     const notification = {
-      title: `Notification of ${process.env.NODE_ENV}`,
-      body: `This is a ${process.env.NODE_ENV} notification`
+      title: `Notification of ${nodeEnv}`,
+      body: `This is a ${nodeEnv} notification`
     }
     new Notification(notification).show()
   })
