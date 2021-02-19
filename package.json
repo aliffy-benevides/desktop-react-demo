@@ -55,6 +55,7 @@
     "appId": "com.electron.desktop-react-demo",
     "productName": "Desktop React Demo",
     "copyright": "Copyright © 2021 Aliffy Benevides",
+    "icon": "build/logo512.png",
     "extraMetadata": {
       "main": "src/electron.js"
     },
@@ -63,7 +64,7 @@
       "node_modules/**/*"
     ],
     "directories": {
-      "buildResources": "assets"
+      "buildResources": "build"
     }
   }
 }
