@@ -4,11 +4,16 @@ const url = require('url');
 const isDev = require('electron-is-dev');
 
 function createWindow() {
+  const iconPath = isDev
+    ? path.join(__dirname, '..', 'public', 'favicon.ico')
+    : path.join(__dirname, '..', 'build', 'favicon.ico')
   const win = new BrowserWindow({
+    icon: iconPath,
     width: 800,
     height: 600,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      contextIsolation: false
     }
   })
 
@@ -17,7 +22,8 @@ function createWindow() {
     win.webContents.openDevTools()
   } else {
     win.loadURL(url.format({
-      pathname: path.join(__dirname, 'index.html'),
+      // pathname: path.join(__dirname, 'index.html'),
+      pathname: path.join(__dirname, '..', 'build', 'index.html'),
       protocol: "file",
       slashes: "true"
     }))
