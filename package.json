@@ -2,7 +2,7 @@
   "name": "desktop-react-demo",
   "description": "Desktop React Demo",
   "author": "Aliffy Benevides",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "homepage": "./",
   "scripts": {
