@@ -3,7 +3,7 @@ Desktop app developed using React and Electron. This is a simple example to demo
 
 ## Setup
 To Setup the project, execute the following commands:
-  - `git clone git@github.com:aliffy-benevides/desktop-react-demo.git`
+  - `git clone https://github.com/aliffy-benevides/desktop-react-demo.git`
   - `cd desktop-react-demo`
   - `npm install`
 
